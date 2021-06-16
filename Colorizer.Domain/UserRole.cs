@@ -1,6 +1,4 @@
-﻿
-
-namespace Colorizer.Application
+﻿namespace Colorizer.Domain
 {
     public enum UserRole
     {
