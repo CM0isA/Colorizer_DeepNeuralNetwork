@@ -13,11 +13,11 @@ namespace Colorizer.Application
     {
         public static void RegisterApplicationLayer(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddScoped<UserService>();
-            //services.AddScoped<IEmailSender, EmailService>();
-            //services.AddScoped<LoginService>();
+            services.AddScoped<UserService>();
+            services.AddScoped<IEmailSender, EmailService>();
+            services.AddScoped<LoginService>();
 
-            //string storageConnectionString = configuration.GetConnectionString("StorageAccount");
+            string storageConnectionString = configuration.GetConnectionString("StorageAccount");
             //services.AddScoped<IFileStorage, BlobStorageProvider>((serviceProvider) => new BlobStorageProvider(storageConnectionString));
         }
     }

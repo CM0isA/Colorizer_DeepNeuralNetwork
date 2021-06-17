@@ -18,8 +18,8 @@ namespace Colorizer.Domain
 
         public string Avatar { get; set; }
 
-        public UserInvitationStatus InvitationStatus { get; set; }
+        public UserAccountStatus AccountStatus { get; set; }
 
-        public string InvitationCode { get; set; }
+        public string AccountCode { get; set; }
     }
 }

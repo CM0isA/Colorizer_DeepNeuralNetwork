@@ -27,11 +27,11 @@ namespace Colorizer.Data
                     .HasColumnType("varchar(255)")
                     .HasConversion(new EnumToStringConverter<UserRole>());
 
-                e.Property(e => e.InvitationStatus)
+                e.Property(e => e.AccountStatus)
                     .HasColumnType("varchar(255)")
-                    .HasConversion(new EnumToStringConverter<UserInvitationStatus>());
+                    .HasConversion(new EnumToStringConverter<UserAccountStatus>());
 
-                e.Property(e => e.InvitationCode)
+                e.Property(e => e.AccountCode)
                    .HasColumnType("varchar(255)");
 
                 e.HasData(
@@ -43,8 +43,8 @@ namespace Colorizer.Data
                         Role = UserRole.Administrator,
                         FirstName = "admin",
                         LastName = "admin",
-                        InvitationStatus = UserInvitationStatus.Accepted,
-                        InvitationCode = ""
+                        AccountStatus = UserAccountStatus.Confirmed,
+                        AccountCode = ""
                     });
             });
         }

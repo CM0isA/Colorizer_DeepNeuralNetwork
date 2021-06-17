@@ -56,7 +56,7 @@ namespace Colorizer.Application
         }
         public void AddUser(User user)
         {
-            user.InvitationCode = CodeGenerator.RandomString();
+            user.AccountCode = CodeGenerator.RandomString();
             _dbContext.Users.Add(user);
             _dbContext.SaveChanges();
         }
@@ -64,19 +64,19 @@ namespace Colorizer.Application
 
         public Boolean IsInvitationCodeValid(string invitationCode)
         {
-            var user = _dbContext.Users.FirstOrDefault<User>(u => u.InvitationCode == invitationCode);
+            var user = _dbContext.Users.FirstOrDefault<User>(u => u.AccountCode == invitationCode);
             if (user == null ||
-                user.InvitationStatus == UserInvitationStatus.Accepted) return false;
+                user.AccountStatus == UserAccountStatus.Created) return false;
             return true;
         }
 
         public void CreateAccount(string invitationCode, CreateAccountModel accountModel)
         {
-            var user = _dbContext.Users.FirstOrDefault(u => u.InvitationCode == invitationCode);
+            var user = _dbContext.Users.FirstOrDefault(u => u.AccountCode == invitationCode);
             user.FirstName = accountModel.FirstName;
             user.LastName = accountModel.LastName;
             user.HashedPassword = BCrypt.Net.BCrypt.HashPassword(accountModel.Password);
-            user.InvitationStatus = UserInvitationStatus.Accepted;
+            user.AccountStatus = UserAccountStatus.Confirmed;
 
             _dbContext.SaveChanges();
         }

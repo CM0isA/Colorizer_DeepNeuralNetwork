@@ -4,14 +4,16 @@ using Colorizer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Colorizer.Data.Migrations
 {
     [DbContext(typeof(ColorizerContext))]
-    partial class ColorizerContextModelSnapshot : ModelSnapshot
+    [Migration("20210616130021_UpdateUsersTable2")]
+    partial class UpdateUsersTable2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

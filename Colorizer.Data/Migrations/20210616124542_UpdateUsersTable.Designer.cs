@@ -4,14 +4,16 @@ using Colorizer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Colorizer.Data.Migrations
 {
     [DbContext(typeof(ColorizerContext))]
-    partial class ColorizerContextModelSnapshot : ModelSnapshot
+    [Migration("20210616124542_UpdateUsersTable")]
+    partial class UpdateUsersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,9 +49,6 @@ namespace Colorizer.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AccountCode")
-                        .HasColumnType("varchar(255)");
-
                     b.Property<string>("AccountStatus")
                         .IsRequired()
                         .HasColumnType("varchar(255)");
@@ -66,6 +65,9 @@ namespace Colorizer.Data.Migrations
                     b.Property<string>("HashedPassword")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("InvitationCode")
+                        .HasColumnType("varchar(255)");
+
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
@@ -81,11 +83,11 @@ namespace Colorizer.Data.Migrations
                         new
                         {
                             Id = new Guid("a9da6906-2870-41ab-92a2-0af5cffb6cf1"),
-                            AccountCode = "",
                             AccountStatus = "Confirmed",
                             Email = "admin@admin.com",
                             FirstName = "admin",
                             HashedPassword = "$2a$11$iQCxKDW4VvAP.1yu5iGe5O6WTjalhd3Ksjvt1NJ2N.8ArSm5HnVOG",
+                            InvitationCode = "",
                             LastName = "admin",
                             Role = "Administrator"
                         });
