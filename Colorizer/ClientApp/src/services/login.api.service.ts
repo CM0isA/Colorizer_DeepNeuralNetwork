@@ -1,6 +1,6 @@
 import {BaseApiService} from './base.api.service';
-import {LoginModel} from "../models/login.model";
-import {LoginResponseModel} from "../models/loginResponse.model";
+import {LoginModel} from "../components/models/login.model";
+import {LoginResponseModel} from "../components/models/loginResponse.model";
 import {AxiosResponse} from "axios";
 
 const loginApiUrl = 'api/login';
