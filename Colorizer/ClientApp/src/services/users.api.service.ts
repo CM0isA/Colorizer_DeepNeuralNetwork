@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { User, UserProfile, EditUser } from '_models';
+import { User, UserProfile } from '../components/models';
 import { BaseApiService } from './base.api.service';
 
 const usersApiUrl = 'api/users';
@@ -13,9 +13,7 @@ export class UsersApiService extends BaseApiService {
     return (await this.GET<UserProfile>(`${usersApiUrl}/getUserProfile`)).data;
   }
 
-  public async updateUserProfile(model: EditUser) {
-    return await this.POST(`${usersApiUrl}/updateUserProfile`, model);
-  }
+
 
   public async createAccount(invitationCode: string, data: any): Promise<AxiosResponse> {
     return await this.PUT(`${usersApiUrl}/createAccount/${invitationCode}`, data);

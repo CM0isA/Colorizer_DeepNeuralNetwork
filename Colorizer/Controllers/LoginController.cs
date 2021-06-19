@@ -21,7 +21,7 @@ namespace Colorizer.Controllers
             LoginResponse response = _loginService.Login(model);
 
             if (response == null)
-                return BadRequest(new { message = "Email or password is incorrect" });
+                return NoContent();
 
             return Ok(response);
         }

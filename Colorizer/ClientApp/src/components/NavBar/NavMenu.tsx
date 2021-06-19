@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../core/contexts/app-context/appContext';
 import './NavMenu.css';
-import { AppBar, Button, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import { NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { UserProfile } from '../models';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,34 +23,72 @@ export function NavMenu() {
   const { user } = appState;
 
   const classes = useStyles();
+  
 
-  function renderNavBar() {
-    return <>
-      <AppBar position="sticky">
-        <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-          <NavLink tag={Link} className="text-light" to="/">
-          <Typography variant="h6" className={classes.title}>
-            Colorizer
-          </Typography>
-          </NavLink>
-          <NavLink tag={Link} className="text-light" to="/login">
-          <Typography variant="h6" className={classes.title}>
-          Login
-          </Typography>
-          </NavLink>
-
-        </Toolbar>
-      </AppBar>
-
-    </>
-  }
 
   return (
     <header>
-      {renderNavBar()}
+      {renderNavBar(user, classes)}
     </header>
   );
+}
+
+
+
+function renderNavBar(user:UserProfile, classes) {
+
+
+  if(!user){
+  return <>
+    <AppBar position="sticky">
+      <Toolbar>
+        <NavLink tag={Link} className="text-light" to="/">
+          <Typography variant="h6" className={classes.title}>
+            Colorizer
+          </Typography>
+        </NavLink>
+        <NavLink tag={Link} className="text-light" to="/login">
+          <Typography variant="h6" className={classes.title}>
+          Login
+          </Typography>
+        </NavLink>
+
+      </Toolbar>
+    </AppBar>
+  </>
+  }
+  else if(user.role=='administrator')
+  {
+    return <>
+        <AppBar position="sticky">
+      <Toolbar>
+        <NavLink tag={Link} className="text-light" to="/">
+        <Typography variant="h6" className={classes.title}>
+          Colorizer
+        </Typography>
+        </NavLink>
+      </Toolbar>
+    </AppBar>
+  </>
+  }
+  else if(user.role=='user')
+  {
+    return <>
+        <AppBar position="sticky">
+      <Toolbar>
+        <NavLink tag={Link} className="text-light" to="/">
+        <Typography variant="h6" className={classes.title}>
+          Colorizer
+        </Typography>
+        </NavLink>
+        <NavLink tag={Link} className="text-light" to="/contact">
+        <Typography variant="h6" className={classes.title}>
+        Contact
+        </Typography>
+        </NavLink>
+      </Toolbar>
+    </AppBar>
+  </>
+  }
+
 }

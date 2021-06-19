@@ -8,6 +8,6 @@ const loginApiUrl = 'api/login';
 export class LoginApiService extends BaseApiService {
 
   public async login (model: LoginModel): Promise<AxiosResponse<LoginResponseModel>> {
-    return (await this.POST(loginApiUrl, model, true));
+    return this.POST(loginApiUrl, model, true);
   }
 }

@@ -1,5 +1,5 @@
 import React, { createContext, useMemo, useReducer } from 'react';
-import { UserProfile } from 'src/components/models';
+import { UserProfile } from '../../../models/userProfile.model';
 import { AppActions } from './appActions';
 import { appReducer } from './appReducer';
 import { AppState } from './appState';

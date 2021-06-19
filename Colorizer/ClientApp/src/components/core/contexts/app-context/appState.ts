@@ -1,4 +1,4 @@
-import { UserProfile } from "src/components/models";
+import { UserProfile } from "../../../models/userProfile.model";
 
 export interface AppState {
     isLoading: boolean;
