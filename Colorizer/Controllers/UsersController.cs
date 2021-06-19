@@ -28,24 +28,16 @@ namespace CegekaAcademy1.Controllers
             return Ok(_userService.GetUser(id));
         }
 
-       
-        // POST api/<UsersController>
-        [HttpPost]
-        [Authorize(UserRole.Administrator)]
-        public void Post(User user)
-        {
-            _userService.AddUser(user);
-            _emailSender.SendEmail(user.Email, user.AccountCode);
-        }
-
-        // PUT api/<UsersController>/5
-        [HttpPut("createAccount/{invitationCode}")]
-        public IActionResult CreateAccount([FromRoute]string invitationCode, [FromBody]CreateAccountModel accountModel)
+        [HttpPost("createAccount/")]
+        public IActionResult CreateAccount([FromBody]CreateAccountModel accountModel)
         {
             if (!ModelState.IsValid) return BadRequest();
             try
             {
-                _userService.CreateAccount(invitationCode, accountModel);
+
+                var code =  _userService.CreateAccount(accountModel);
+                _emailSender.SendEmail(accountModel.Email,code);
+
                 return Ok();
             }
             catch

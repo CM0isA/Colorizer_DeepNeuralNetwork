@@ -57,6 +57,7 @@ namespace Colorizer.Application
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 // do nothing if jwt validation fails
                 // user is not attached to context so request won't have access to secure routes
             }

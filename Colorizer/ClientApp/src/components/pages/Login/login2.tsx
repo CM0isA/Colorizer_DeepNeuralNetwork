@@ -2,11 +2,11 @@
 import React, {useContext, useState} from 'react';
 import { useHistory } from 'react-router-dom';
 // services
-import { LoginApiService } from '_services';
+import { LoginApiService } from '../../../services/login.api.service';
 //styles
 import * as Yup from 'yup';
 import { Formik, Form, FormikProps } from 'formik';
-import {AppContext} from "../core/contexts/app-context/appContext";
+import {AppContext} from "../../core/contexts/app-context/appContext";
 import { Grid, TextField, Button, Typography, makeStyles, CircularProgress } from '@material-ui/core';
 
 interface LoginProps {
@@ -64,7 +64,7 @@ const validationSchema = Yup.object().shape({
     .required('Password is required')
 });
 
-const Login: React.FC = () => {
+const Login2: React.FC = () => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -147,7 +147,7 @@ const Login: React.FC = () => {
                     helperText={
                       errors.password && touched.password
                         ? errors.password
-                        : errors.password
+                        : "errors.password"
                     }
                     error={
                       !!(errors.password)
@@ -185,4 +185,4 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login;
+export default Login2;

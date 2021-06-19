@@ -66,10 +66,5 @@ namespace Colorizer.Application
             }
         }
 
-        public void SendEmailV2(string emailAddress, string program)
-        {
-            var emailMessage = CreateMessage(emailAddress, program);
-            Send(emailMessage);
-        }
     }
 }

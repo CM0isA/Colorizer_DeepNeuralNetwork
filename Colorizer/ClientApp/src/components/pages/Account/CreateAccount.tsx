@@ -1,8 +1,10 @@
 import { Button, CircularProgress, Grid, Snackbar, TextField } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { Form, Formik, FormikProps } from 'formik';
-import React from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router';
 import * as yup from 'yup';
+import { UsersApiService } from '../../../services';
 
 
 interface AccountProps {
@@ -46,21 +48,32 @@ const validationSchema = yup.object().shape({
 
 
 const CreateAccount: React.FC = () => {
-    const [openSnackbar, setOpenSnackbar] = React.useState(false);
-    const [account, setAccount] = React.useState<Account>(initialValues)
+    const history = useHistory();
+    const [openSnackbar, setOpenSnackbar] = useState(false);
+    const [errorSnackbar, setErrorSnackbar]  = useState<boolean>(false);
 
-    const onSubmit = async () => {
-        
-        const values: Account = {
-            email: email,
-            
+    const userService = new UsersApiService();
+    const onSubmit = async (values: AccountProps, actions) => {
+        const account: Account = {
+            email: values.email,
+            password: values.password,
         }
 
-        console.log(account);
+
+        const response = await userService.createAccount(account);
+        console.log(response)
+        actions.setSubmitting(false);
         
-        
-        
-        setOpenSnackbar(true);
+
+        if(response.status !==200)
+        {
+            setErrorSnackbar(true);
+        }
+        else
+        {
+            history.replace('/');
+            setOpenSnackbar(true);
+        }        
     }
 
     const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
@@ -75,7 +88,7 @@ const CreateAccount: React.FC = () => {
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
-                onSubmit={values => { setAccount(values); onSubmit()}}
+                onSubmit={onSubmit}
             >
                 {(props: FormikProps<AccountProps>) => {
                     const {
@@ -89,6 +102,11 @@ const CreateAccount: React.FC = () => {
                                     A confirmation mail have been send to the specified address.
                                 </Alert>
                             </Snackbar>
+                            <Snackbar open={errorSnackbar} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                                <Alert onClose={handleClose} severity='error'>
+                                    An error occured during the account creation. Please check your mail for confirmation messages and try again.
+                                </Alert>
+                            </Snackbar>
                             {renderElements(values, errors, touched, isSubmitting, handleChange, handleBlur)}
                         </Form>);
                 }}
@@ -100,7 +118,6 @@ const CreateAccount: React.FC = () => {
         return (
             <>
                 <Grid container justify='space-around' direction='row'>
-
                     <Grid item xs={10}>
                         <TextField
                             required
@@ -178,7 +195,6 @@ const CreateAccount: React.FC = () => {
         <>
             {renderCreateAccount()}
         </>
-
     )
 }
 

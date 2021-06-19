@@ -15,8 +15,8 @@ export class UsersApiService extends BaseApiService {
 
 
 
-  public async createAccount(invitationCode: string, data: any): Promise<AxiosResponse> {
-    return await this.PUT(`${usersApiUrl}/createAccount/${invitationCode}`, data);
+  public async createAccount(data: any): Promise<AxiosResponse> {
+    return this.POST(`${usersApiUrl}/createAccount/`, data);
   }
 
   public async checkInvitationCode(invitationCode: string) {

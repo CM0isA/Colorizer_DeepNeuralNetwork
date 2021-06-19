@@ -7,11 +7,7 @@ namespace Colorizer.Domain.Models
         [Required]
         [MinLength(2)]
         [MaxLength(40)]
-        public string FirstName { get; set; }
-        [Required]
-        [MinLength(2)]
-        [MaxLength(40)]
-        public string LastName { get; set; }
+        public string Email { get; set; }
         [Required]
         [MinLength(6)]
         [MaxLength(40)]

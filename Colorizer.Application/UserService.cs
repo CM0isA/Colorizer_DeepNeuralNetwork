@@ -10,6 +10,7 @@ namespace Colorizer.Application
     public class UserService
     {
         private readonly ColorizerContext _dbContext;
+        
 
         public UserService(ColorizerContext dbContext)
         {
@@ -24,6 +25,11 @@ namespace Colorizer.Application
         public User GetUser(Guid id)
         {
             return _dbContext.Users.Find(id);
+        }
+
+        public User GetUserByEmail(string email)
+        {
+            return _dbContext.Users.FirstOrDefault(user => user.Email == email);
         }
 
         public UserProfileModel GetUserInfo(Guid id)
@@ -54,12 +60,6 @@ namespace Colorizer.Application
             _dbContext.Users.Remove(user);
             _dbContext.SaveChanges();
         }
-        public void AddUser(User user)
-        {
-            user.AccountCode = CodeGenerator.RandomString();
-            _dbContext.Users.Add(user);
-            _dbContext.SaveChanges();
-        }
 
 
         public Boolean IsInvitationCodeValid(string invitationCode)
@@ -70,15 +70,44 @@ namespace Colorizer.Application
             return true;
         }
 
-        public void CreateAccount(string invitationCode, CreateAccountModel accountModel)
+        public string CreateAccount(CreateAccountModel accountModel)
         {
-            var user = _dbContext.Users.FirstOrDefault(u => u.AccountCode == invitationCode);
-            user.FirstName = accountModel.FirstName;
-            user.LastName = accountModel.LastName;
-            user.HashedPassword = BCrypt.Net.BCrypt.HashPassword(accountModel.Password);
-            user.AccountStatus = UserAccountStatus.Confirmed;
 
-            _dbContext.SaveChanges();
+            User find = GetUserByEmail(accountModel.Email);
+
+            if (find == null)
+                try
+                {
+
+
+                    User user = new()
+                    {
+                        Id = new Guid(),
+                        AccountCode = CodeGenerator.RandomString(),
+                        FirstName = "",
+                        LastName = "",
+                        HashedPassword = BCrypt.Net.BCrypt.HashPassword(accountModel.Password),
+                        Role = UserRole.User,
+                        AccountStatus = UserAccountStatus.Created,
+                        Email = accountModel.Email,
+                        Avatar = "",
+                    };
+
+                    _dbContext.Users.Add(user);
+                    _dbContext.SaveChanges();
+
+
+
+                    return user.AccountCode;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return "";
+                }
+            else return "";
+
+
         }
     }
 }
