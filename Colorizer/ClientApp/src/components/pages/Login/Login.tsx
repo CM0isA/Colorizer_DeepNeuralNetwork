@@ -4,14 +4,8 @@ import { LoginApiService } from '../../../services/login.api.service';
 import * as yup from 'yup';
 import { AppContext } from '../../core/contexts/app-context/appContext';
 import { Form, Formik, FormikProps } from 'formik';
-import { Button, CircularProgress, Grid, Snackbar, TextField } from '@material-ui/core';
+import { Button, CircularProgress, Grid, Link, Snackbar, TextField } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
-
-
-interface FormStatus {
-  message: string;
-  type: string;
-}
 
 interface LoginProps {
   email: string;
@@ -58,8 +52,6 @@ const Login: React.FC = () => {
       login(userProfile, token);
       actions.setSubmitting(false);
       history.replace('/');
-
-
     }
 
   }
@@ -101,6 +93,11 @@ const Login: React.FC = () => {
     return (
       <>
         <Grid container justify='space-around' direction='row'>
+          <Grid item xs={5}>
+            <Link href={'/createAccount'}>
+            <Button >Create an Account</Button>
+            </Link>
+          </Grid>
           <Grid item xs={10}>
             <TextField
               required

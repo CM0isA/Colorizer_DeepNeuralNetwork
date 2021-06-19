@@ -7,6 +7,7 @@ import './custom.css'
 import Login from './components/pages/Login/Login';
 import Contact from './components/pages/Contact/Contact';
 import { AppContextProvider } from './components/core/contexts/app-context/appContext';
+import CreateAccount from './components/pages/Account/CreateAccount';
 
 const MainLayout = () => (
   <Layout>
@@ -23,6 +24,7 @@ const App = () => (
   <AppContextProvider>
     <Switch>
       <Route exact path='/login' component={Login} />
+      <Route exact path='/createAccount' component={CreateAccount} />
       <Route path='/home/' component={MainLayout}></Route>
       <Layout>
         <Route exact path='/' component={Home} />

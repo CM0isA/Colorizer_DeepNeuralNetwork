@@ -1,15 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Colorizer.Application;
 using Colorizer.Domain;
 using Colorizer.Domain.Models;
 using System;
 using Colorizer.Application.Helpers;
-using System.IdentityModel.Tokens.Jwt;
-
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CegekaAcademy1.Controllers
 {

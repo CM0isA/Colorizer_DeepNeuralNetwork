@@ -3,4 +3,8 @@ export interface UserProfile {
     lastName: string;
     email: string;
     role: string;
+    hashedPassword: string;
+    accountStatus: string;
+    accountCode: string;
+    avatar: string;
 }
