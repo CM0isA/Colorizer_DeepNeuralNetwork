@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Grid, Snackbar, TextField } from '@material-ui/core';
+import { Button, CircularProgress, Grid, makeStyles, Snackbar, TextField, Typography } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { Form, Formik, FormikProps } from 'formik';
 import React, { useState } from 'react'
@@ -6,6 +6,25 @@ import { useHistory } from 'react-router';
 import * as yup from 'yup';
 import { UsersApiService } from '../../../services';
 
+const useStyles = makeStyles({
+    root: {
+        maxWidth: '450px',
+        textAlign: 'center',
+        margin: '100px auto',
+        backgroundColor: 'white',
+        border: '1px solid black'
+    },
+    submitButton: {
+        textAlign: 'center',
+        padding: '15px auto',
+        marginTop: '10px',
+        marginBottom: '10px'
+
+    },
+    title: {
+        padding: '15px 0'
+    }
+});
 
 interface AccountProps {
     email: string;
@@ -48,6 +67,7 @@ const validationSchema = yup.object().shape({
 
 
 const CreateAccount: React.FC = () => {
+    const classes = useStyles();
     const history = useHistory();
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [errorSnackbar, setErrorSnackbar]  = useState<boolean>(false);
@@ -61,10 +81,7 @@ const CreateAccount: React.FC = () => {
 
 
         const response = await userService.createAccount(account);
-        console.log(response)
         actions.setSubmitting(false);
-        
-
         if(response.status !==200)
         {
             setErrorSnackbar(true);
@@ -96,7 +113,7 @@ const CreateAccount: React.FC = () => {
                     } = props;
 
                     return (
-                        <Form>
+                        <Form className={classes.root}>
                             <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleClose} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
                                 <Alert onClose={handleClose} severity='info'>
                                     A confirmation mail have been send to the specified address.
@@ -117,9 +134,12 @@ const CreateAccount: React.FC = () => {
     const renderElements = (values, errors, touched, isSubmitting, handleChange, handleBlur) => {
         return (
             <>
+                <Typography className={classes.title}>Create Account</Typography>
                 <Grid container justify='space-around' direction='row'>
+                    
                     <Grid item xs={10}>
                         <TextField
+                            fullWidth
                             required
                             autoComplete='false'
                             name="email"
@@ -133,12 +153,13 @@ const CreateAccount: React.FC = () => {
                                     : ''
                             }
                             onBlur={handleBlur}
-                            error={!!(errors.email)}
+                            error={errors.email && touched.email ? true : false}
                             onChange={handleChange}
                         />
                     </Grid>
                     <Grid item xs={10}>
                         <TextField
+                            fullWidth
                             autoComplete='false'
                             required
                             name="password"
@@ -152,12 +173,13 @@ const CreateAccount: React.FC = () => {
                                     : null
                             }
                             onBlur={handleBlur}
-                            error={!!(errors.password)}
+                            error={errors.password && touched.password ? true : false}
                             onChange={handleChange}
                         />
                     </Grid>
                     <Grid item xs={10}>
                         <TextField
+                            fullWidth
                             required
                             name="confirmPassword"
                             id="confirmPassword"
@@ -170,7 +192,7 @@ const CreateAccount: React.FC = () => {
                                     : null
                             }
                             onBlur={handleBlur}
-                            error={!!(errors.confirmPassword)}
+                            error={errors.confirmPassword && touched.confirmPassword ? true : false}
                             onChange={handleChange}
                         />
                     </Grid>
@@ -182,6 +204,7 @@ const CreateAccount: React.FC = () => {
                                 variant="contained"
                                 color="primary"
                                 disabled={isSubmitting}
+                                className={classes.submitButton}
                             >
                                 Create Account
                             </Button>}

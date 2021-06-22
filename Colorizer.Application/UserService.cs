@@ -61,13 +61,24 @@ namespace Colorizer.Application
             _dbContext.SaveChanges();
         }
 
-
-        public Boolean IsInvitationCodeValid(string invitationCode)
+        public void ConfirmAccount(User user)
         {
-            var user = _dbContext.Users.FirstOrDefault<User>(u => u.AccountCode == invitationCode);
+            var updatedUser = _dbContext.Users.FirstOrDefault(u => u.Id == user.Id);
+            updatedUser.FirstName = user.FirstName;
+            updatedUser.LastName = user.LastName;
+            updatedUser.AccountStatus = UserAccountStatus.Confirmed;
+
+            _dbContext.Update(updatedUser);
+            _dbContext.SaveChanges();
+        }
+
+
+        public User IsCodeValid(string code)
+        {
+            var user = _dbContext.Users.FirstOrDefault<User>(u => u.AccountCode == code);
             if (user == null ||
-                user.AccountStatus == UserAccountStatus.Created) return false;
-            return true;
+                user.AccountStatus == UserAccountStatus.Confirmed) return null;
+            return user;
         }
 
         public string CreateAccount(CreateAccountModel accountModel)

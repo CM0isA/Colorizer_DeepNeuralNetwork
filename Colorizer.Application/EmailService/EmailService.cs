@@ -9,28 +9,17 @@ namespace Colorizer.Application
     {
         private Message message;
         private readonly EmailConfiguration _emailConfiguration;
+        
         public EmailService(EmailConfiguration emailConfiguration)
         {
             _emailConfiguration = emailConfiguration;
-            message = new Message("Confirm invitation", _emailConfiguration.URL);
+            message = new Message("Confirm account", _emailConfiguration.URL);
         }
 
         public void SendEmail(string emailAddress, string code)
         {
             var emailMessage = CreateEmailMessage(emailAddress, code);
             Send(emailMessage);
-        }
-
-        private MimeMessage CreateMessage(string emailAddress, string program)
-        {
-            var message = new Message("New enrollment", "You have been assigned to program " + program) ;
-            var emailMessage = new MimeMessage();
-            emailMessage.From.Add(new MailboxAddress(_emailConfiguration.From));
-            var to = new MailboxAddress(emailAddress);
-            emailMessage.To.Add(to);
-            emailMessage.Subject = message.Subject;
-            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Body };
-            return emailMessage;
         }
 
         private MimeMessage CreateEmailMessage(string emailAddress, string code)
@@ -41,7 +30,10 @@ namespace Colorizer.Application
             emailMessage.To.Add(to);
             emailMessage.Subject = message.Subject;
             message.Body += code;
-            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = message.Body };
+            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Text) { Text = 
+                @"Please click on the following link to complete the account creation: " + 
+
+                message.Body };
             return emailMessage;
         }
 

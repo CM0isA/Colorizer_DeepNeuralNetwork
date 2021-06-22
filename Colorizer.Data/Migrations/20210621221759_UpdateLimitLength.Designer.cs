@@ -4,14 +4,16 @@ using Colorizer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Colorizer.Data.Migrations
 {
     [DbContext(typeof(ColorizerContext))]
-    partial class ColorizerContextModelSnapshot : ModelSnapshot
+    [Migration("20210621221759_UpdateLimitLength")]
+    partial class UpdateLimitLength
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,21 +51,18 @@ namespace Colorizer.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AccountCode")
-                        .IsRequired()
                         .HasMaxLength(15)
                         .HasColumnType("varchar(15)");
 
                     b.Property<string>("AccountStatus")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Avatar")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
@@ -72,7 +71,6 @@ namespace Colorizer.Data.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("HashedPassword")
-                        .IsRequired()
                         .HasMaxLength(60)
                         .HasColumnType("nvarchar(60)");
 
@@ -82,8 +80,7 @@ namespace Colorizer.Data.Migrations
 
                     b.Property<string>("Role")
                         .IsRequired()
-                        .HasMaxLength(15)
-                        .HasColumnType("varchar(15)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 

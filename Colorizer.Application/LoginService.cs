@@ -27,6 +27,8 @@ namespace Colorizer.Application
 
             // return null if user not found
             if (user == null) return null;
+            else if (user.AccountStatus == UserAccountStatus.Created)
+                return null;
 
             var isPasswordValid = BCrypt.Net.BCrypt.Verify(model.Password, user.HashedPassword);
             if (!isPasswordValid)

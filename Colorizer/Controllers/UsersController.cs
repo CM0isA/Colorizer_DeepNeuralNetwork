@@ -36,9 +36,12 @@ namespace CegekaAcademy1.Controllers
             {
 
                 var code =  _userService.CreateAccount(accountModel);
-                _emailSender.SendEmail(accountModel.Email,code);
-
-                return Ok();
+                if (code != "")
+                {
+                    _emailSender.SendEmail(accountModel.Email, code);
+                    return Ok();
+                }
+                return NoContent();
             }
             catch
             {
@@ -65,10 +68,19 @@ namespace CegekaAcademy1.Controllers
             return Ok();
         }
 
-        [HttpGet("invitationCodeStatus/{invitationCode}")]
-        public IActionResult CheckInvitationCode([FromRoute] string invitationCode)
+        [HttpGet("getUserInfo/{code}")]
+        public IActionResult CheckInvitationCode([FromRoute] string Code)
         {
-            if (!_userService.IsInvitationCodeValid(invitationCode)) return BadRequest();
+            var user = _userService.IsCodeValid(Code);
+            if (user == null) return BadRequest();
+            return Ok(user);
+        }
+
+        [HttpPut("confirmAccount")]
+        public IActionResult ConfirmAccount([FromBody]User user)
+        {
+            _userService.ConfirmAccount(user);
+
             return Ok();
         }
 

@@ -4,7 +4,7 @@ import './NavMenu.css';
 import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import { NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { UserProfile } from '../models';
+import { User } from '../models';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +35,7 @@ export function NavMenu() {
 
 
 
-function renderNavBar(user:UserProfile, classes) {
+function renderNavBar(user: User, classes) {
 
 
   if(!user){
@@ -81,7 +81,7 @@ function renderNavBar(user:UserProfile, classes) {
           Colorizer
         </Typography>
         </NavLink>
-        <NavLink tag={Link} className="text-light" to="/contact">
+        <NavLink tag={Link} className="text-light" to="/home/contact">
         <Typography variant="h6" className={classes.title}>
         Contact
         </Typography>
