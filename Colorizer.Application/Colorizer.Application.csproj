@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Colorizer.Domain\Colorizer.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Python\" />
+  </ItemGroup>
+
 </Project>

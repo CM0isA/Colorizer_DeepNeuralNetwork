@@ -7,6 +7,7 @@ namespace Colorizer.Domain.Models
         [Required]
         [MinLength(2)]
         [MaxLength(40)]
+        [EmailAddress]
         public string Email { get; set; }
         [Required]
         [MinLength(6)]

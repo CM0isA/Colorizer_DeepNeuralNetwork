@@ -69,7 +69,7 @@ namespace CegekaAcademy1.Controllers
         }
 
         [HttpGet("getUserInfo/{code}")]
-        public IActionResult CheckInvitationCode([FromRoute] string Code)
+        public IActionResult CheckAccountCode([FromRoute] string Code)
         {
             var user = _userService.IsCodeValid(Code);
             if (user == null) return BadRequest();

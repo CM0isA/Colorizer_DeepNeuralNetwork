@@ -1,0 +1,12 @@
+.background {
+    background: url('./assets/images/background.png');
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-attachment: fixed;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    font-size: 2.5vh;
+    min-height: 100vh;
+}
