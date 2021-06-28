@@ -1,8 +1,8 @@
-import { UserProfile } from "../../../models/userProfile.model";
+import { User } from "../../../models/user.model";
 
 export interface AppState {
     isLoading: boolean;
     email: string;
     token: string;
-    user: UserProfile;
+    user: User;
 }

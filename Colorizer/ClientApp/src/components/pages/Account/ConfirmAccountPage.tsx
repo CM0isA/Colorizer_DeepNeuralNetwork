@@ -84,7 +84,6 @@ export default function ConfirmAccountPage() {
     const onSubmit = async (values: ConfirmAccountProps, actions) => {
         user.firstName = values.firstName;
         user.lastName = values.lastName;
-        console.log(user)
         await userService.confirmAccount(user);
         
         actions.setSubmitting(false);

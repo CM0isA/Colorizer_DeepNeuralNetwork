@@ -15,8 +15,6 @@ const MainLayout = () => (
     <Authentication>
       <Route path='/contact' component={Contact} />
     </Authentication>
-
-    
   </Layout>);
 
 

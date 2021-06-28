@@ -74,9 +74,9 @@ const Login: React.FC = () => {
       setOpen(true);
     }
     else {
-      const { token, userProfile } = response.data;
+      const { token, User } = response.data;
       localStorage.setItem('token', token);
-      login(userProfile, token);
+      login(User, token);
       actions.setSubmitting(false);
       history.replace('/');
     }

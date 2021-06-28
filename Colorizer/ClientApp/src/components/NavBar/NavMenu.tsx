@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../core/contexts/app-context/appContext';
 import './NavMenu.css';
 import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core';
@@ -21,11 +21,9 @@ const useStyles = makeStyles((theme) => ({
 export function NavMenu() {
   const { appState } = useContext(AppContext);
   const { user } = appState;
-
+  console.log(user)
   const classes = useStyles();
   
-
-
   return (
     <header>
       {renderNavBar(user, classes)}
@@ -67,6 +65,16 @@ function renderNavBar(user: User, classes) {
           Colorizer
         </Typography>
         </NavLink>
+        <NavLink tag={Link} className="text-light" to="/">
+        <Typography variant="h6" className={classes.title}>
+          Users
+        </Typography>
+        </NavLink>
+        <NavLink tag={Link} className="text-light" to="/">
+        <Typography variant="h6" className={classes.title}>
+          Reports
+        </Typography>
+        </NavLink>
       </Toolbar>
     </AppBar>
   </>
@@ -83,7 +91,7 @@ function renderNavBar(user: User, classes) {
         </NavLink>
         <NavLink tag={Link} className="text-light" to="/home/contact">
         <Typography variant="h6" className={classes.title}>
-        Contact
+          Contact
         </Typography>
         </NavLink>
       </Toolbar>
