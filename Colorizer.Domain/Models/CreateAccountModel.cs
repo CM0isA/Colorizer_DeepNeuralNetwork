@@ -15,4 +15,5 @@ namespace Colorizer.Domain.Models
         [RegularExpression(@"^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()]).{2,26}\S$")]
         public string Password { get; set; }
     }
+
 }

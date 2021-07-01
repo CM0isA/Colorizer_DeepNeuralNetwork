@@ -13,7 +13,7 @@ import ConfirmAccountPage from './components/pages/Account/ConfirmAccountPage';
 const MainLayout = () => (
   <Layout>
     <Authentication>
-      <Route path='/contact' component={Contact} />
+      <Route path='/home/contact' component={Contact} />
     </Authentication>
   </Layout>);
 

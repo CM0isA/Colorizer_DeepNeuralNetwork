@@ -1,12 +1,11 @@
 import {BaseApiService} from './base.api.service';
-import {LoginResponseModel} from "../components/models/loginResponse.model";
 import {AxiosResponse} from "axios";
 
-const reportsApiUrl = 'api/reports';
+const reportsApiUrl = 'api/report';
 
 export class ReportsApiService extends BaseApiService {
 
-  public async login (data: any): Promise<AxiosResponse<LoginResponseModel>> {
+  public async submitReport (data: any): Promise<AxiosResponse> {
     return this.POST(reportsApiUrl, data);
   }
 }

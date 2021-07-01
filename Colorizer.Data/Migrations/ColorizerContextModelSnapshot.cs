@@ -19,7 +19,7 @@ namespace Colorizer.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.7")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Colorizer.Domain.Reports", b =>
+            modelBuilder.Entity("Colorizer.Domain.Report", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -28,9 +28,15 @@ namespace Colorizer.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -103,7 +109,7 @@ namespace Colorizer.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Colorizer.Domain.Reports", b =>
+            modelBuilder.Entity("Colorizer.Domain.Report", b =>
                 {
                     b.HasOne("Colorizer.Domain.User", "User")
                         .WithMany()

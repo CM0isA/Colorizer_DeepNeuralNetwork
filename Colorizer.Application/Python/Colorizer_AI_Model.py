@@ -1,33 +1,39 @@
-import tensorflow as tf
-from keras.models import load_model
+#!/usr/bin/python
 
+from keras.models import load_model
+from keras.preprocessing.image import load_img, img_to_array, array_to_img
+from skimage.color import rgb2lab, lab2rgb
+from numpy import array, zeros, asarray, uint8
+import sys
+from skimage.io import imsave
 
 model = load_model('model.h5')
 
-print(model.summary())
-
-
-import json
-import sys
-import base64
-import os
-import numpy as np
+img = load_img(sys.argv[1])
+size = img.size
+img = img.resize((256,256))
 
 
 
-app = Flask(__name__)
+arr = img_to_array(img)
+arr = array(arr, dtype=float)
+arr = rgb2lab(1.0/255*arr)[:,:,:]
+arr = arr.reshape(arr.shape+(1,))
 
 
-@app.route('/ruta', methods=['POST'])
-def function():
-    # aico returnezi raspuns, nu ceea ce prelucrezi
-    return jsonify(data)
+output = model.predict(arr)
+output = output * 128
 
 
-@app.route('/sendToCDiez')
-def send():
-    
-    return encodedPanorama   # dai return la ce vrei tu, ai grija la tip. de recomandat un json, sau daca ai poza bitmap
+cur = zeros((256, 256, 3))
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+
+cur[:,:,0] = arr[:,:,0,0]
+cur[:,:,1:] = output[:,:,:,0]
+cur = lab2rgb(cur)
+cur = cur * 255
+imag = cur.astype(uint8)
+path = "E:/Licenta/Colorizer/Colorizer.Application/Python/Results/"+ sys.argv[2] + ".png"
+imsave(path, imag )
+print(path)
+

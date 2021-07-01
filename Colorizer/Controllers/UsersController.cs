@@ -5,7 +5,7 @@ using Colorizer.Domain.Models;
 using System;
 using Colorizer.Application.Helpers;
 
-namespace CegekaAcademy1.Controllers
+namespace Colorizer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

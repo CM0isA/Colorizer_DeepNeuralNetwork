@@ -1,5 +1,5 @@
 import React, { createContext, useMemo, useReducer } from 'react';
-import {  User } from '../../../models/user.model';
+import {  UserProfile } from '../../../models/userProfile.model';
 import { AppActions } from './appActions';
 import { appReducer } from './appReducer';
 import { AppState } from './appState';
@@ -14,7 +14,7 @@ const initialAppState: AppState = {
 
 let dispatcher = {
   updateEmail: (newEmail: string) => {},
-  login: (user: User, token: string) => {},
+  login: (user: UserProfile, token: string) => {},
   logout: () => {},
 };
 
@@ -29,11 +29,11 @@ export const AppContextProvider = ({ children }: any) => {
           newEmail: newEmail,
         });
       },
-      login: (user: User, token: string) => {
+      login: (userProfile: UserProfile, token: string) => {
         dispatch({
           type: AppActions.LOGIN,
           token: token,
-          user: user,
+          user: userProfile,
         });
       },
       logout: () => {

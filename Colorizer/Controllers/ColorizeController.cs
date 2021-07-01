@@ -22,8 +22,8 @@ namespace Colorizer.Controllers
         [HttpPost]
         public async Task<IActionResult> Colorize(IFormFile image)
         {
-            await _colorizeService.ColorizeAsync(image);
-            return Ok();
+            var fileloc = await _colorizeService.ColorizeAsync(image);
+            return Ok(fileloc);
         }
     }
 }

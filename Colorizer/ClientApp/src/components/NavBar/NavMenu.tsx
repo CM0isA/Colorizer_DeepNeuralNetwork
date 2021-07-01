@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppContext } from '../core/contexts/app-context/appContext';
 import './NavMenu.css';
 import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core';
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 export function NavMenu() {
   const { appState } = useContext(AppContext);
   const { user } = appState;
-  console.log(user)
   const classes = useStyles();
   
   return (

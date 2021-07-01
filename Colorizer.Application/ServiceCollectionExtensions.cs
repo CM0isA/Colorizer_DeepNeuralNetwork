@@ -17,6 +17,7 @@ namespace Colorizer.Application
             services.AddScoped<IEmailSender, EmailService>();
             services.AddScoped<LoginService>();
             services.AddScoped<ColorizeService>();
+            services.AddScoped<ReportService>();
 
             string storageConnectionString = configuration.GetConnectionString("StorageAccount");
             //services.AddScoped<IFileStorage, BlobStorageProvider>((serviceProvider) => new BlobStorageProvider(storageConnectionString));
