@@ -33,7 +33,7 @@ cur[:,:,1:] = output[:,:,:,0]
 cur = lab2rgb(cur)
 cur = cur * 255
 imag = cur.astype(uint8)
-path = "E:/Licenta/Colorizer/Colorizer.Application/Python/Results/"+ sys.argv[2] + ".png"
+path = "E:/Licenta/Colorizer/Colorizer/Results/"+ sys.argv[2] + ".png"
 imsave(path, imag )
-print(path)
+print(sys.argv[2], end="")
 

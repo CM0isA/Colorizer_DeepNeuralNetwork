@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../core/contexts/app-context/appContext';
 import './NavMenu.css';
 import { AppBar, makeStyles, Toolbar, Typography } from '@material-ui/core';

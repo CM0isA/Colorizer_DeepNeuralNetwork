@@ -1,5 +1,5 @@
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { AppContext } from '../../core/contexts/app-context/appContext';
 import { Button, Grid, NativeSelect, TextField, Typography } from '@material-ui/core';
 import { createStyles, withStyles, Theme, makeStyles } from '@material-ui/core/styles';
@@ -77,10 +77,6 @@ export default function Contact() {
     const [values, setValues] = useState(initialValues);
     const [type, setType] = React.useState('');
     const reportService = new ReportsApiService();
-
-    useEffect(() => {
-        console.log(type)
-    }, [type])
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;

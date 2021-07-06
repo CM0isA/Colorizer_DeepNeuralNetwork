@@ -1,18 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
 
-axios.interceptors.response.use(function(response) {
-    return response;
-}, function(error) {
-    if (401 === error.response.status) {
-        window.location.pathname = '/login';
-    }
-    if (403 === error.response.status) {
-        window.location.pathname = '/forbidden';
-    }
-});
-
-
-
 export class BaseApiService {
     private _anonymous: boolean = false;
 

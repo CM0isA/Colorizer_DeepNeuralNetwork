@@ -36,7 +36,7 @@ namespace Colorizer.Application
         {
             var user = GetUser(id);
             if (user == null) return null;
-            UserProfileModel info = new UserProfileModel(user);
+            UserProfileModel info = new(user);
             return info;
         }
 

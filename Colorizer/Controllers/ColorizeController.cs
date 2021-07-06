@@ -1,14 +1,10 @@
 ﻿using Colorizer.Application;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Colorizer.Controllers
 {
-    [Route("api/colorize")]
+    [Route("api/[controller]")]
     [ApiController]
     public class ColorizeController : ControllerBase
     {
@@ -19,11 +15,20 @@ namespace Colorizer.Controllers
             _colorizeService = colorizeService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Colorize(IFormFile image)
+        [HttpGet("{image}")]
+        public IActionResult DownloadImge([FromRoute] string image)
         {
-            var fileloc = await _colorizeService.ColorizeAsync(image);
-            return Ok(fileloc);
+            return _colorizeService.DownloadImage(image);
+        }
+
+
+
+        [HttpPost]
+        public string Colorize(IFormFile image)
+        {
+            var file = _colorizeService.ColorizeAsync(image);
+
+            return file;
         }
     }
 }

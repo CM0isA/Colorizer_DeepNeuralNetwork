@@ -13,11 +13,14 @@ namespace Colorizer.Controllers
     {
         private readonly UserService _userService;
         private readonly IEmailSender _emailSender;
+        private readonly ColorizeService _colorizeService;
 
-        public UsersController(UserService userService, IEmailSender emailSender)
+        public UsersController(UserService userService, IEmailSender emailSender, ColorizeService colorizeService)
         {
             _userService = userService;
             _emailSender = emailSender;
+            _colorizeService = colorizeService;
+            
         }
 
         // GET api/<UsersController>/5
@@ -27,6 +30,15 @@ namespace Colorizer.Controllers
         {
             return Ok(_userService.GetUser(id));
         }
+
+        [HttpGet]
+        [Route("/download/{image}")]
+        public IActionResult DownloadImge(string image)
+        {
+            return _colorizeService.DownloadImage(image);
+        }
+
+
 
         [HttpPost("createAccount/")]
         public IActionResult CreateAccount([FromBody]CreateAccountModel accountModel)

@@ -232,3 +232,4 @@ _Pvt_Extensions
 .fake/
 /Colorizer/ClientApp/public/PNG
 /Colorizer.Application/Python/Results
+/Colorizer/ClientApp/public

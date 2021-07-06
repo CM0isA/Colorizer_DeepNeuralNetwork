@@ -1,8 +1,8 @@
 
 
-import axios, {AxiosResponse} from "axios";
+import axios, { AxiosResponse } from "axios";
 
-const colorizeApiUrl = 'api/colorize';
+const colorizeApiUrl = 'api/colorize/';
 
 export class ColorizeApiService {
 
@@ -10,7 +10,8 @@ export class ColorizeApiService {
     return axios.post(colorizeApiUrl, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
-        }
+        },
+        baseURL:"https://localhost:44360/"
     })
   }
 }

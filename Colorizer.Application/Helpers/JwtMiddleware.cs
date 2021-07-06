@@ -26,12 +26,12 @@ namespace Colorizer.Application
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                attachUserToContext(context, userService, token);
+                AttachUserToContext(context, userService, token);
 
             await _next(context);
         }
 
-        private void attachUserToContext(HttpContext context, UserService userService, string token)
+        private void AttachUserToContext(HttpContext context, UserService userService, string token)
         {
             try
             {
