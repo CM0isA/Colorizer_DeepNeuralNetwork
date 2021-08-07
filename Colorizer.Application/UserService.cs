@@ -61,9 +61,9 @@ namespace Colorizer.Application
             _dbContext.SaveChanges();
         }
 
-        public void ConfirmAccount(User user)
+        public void ConfirmAccount(ConfirmAccountModel user)
         {
-            var updatedUser = _dbContext.Users.FirstOrDefault(u => u.Id == user.Id);
+            var updatedUser = _dbContext.Users.FirstOrDefault(u => u.Id.ToString() == user.Id);
             updatedUser.FirstName = user.FirstName;
             updatedUser.LastName = user.LastName;
             updatedUser.AccountStatus = UserAccountStatus.Confirmed;

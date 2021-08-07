@@ -31,15 +31,6 @@ namespace Colorizer.Controllers
             return Ok(_userService.GetUser(id));
         }
 
-        [HttpGet]
-        [Route("/download/{image}")]
-        public IActionResult DownloadImge(string image)
-        {
-            return _colorizeService.DownloadImage(image);
-        }
-
-
-
         [HttpPost("createAccount/")]
         public IActionResult CreateAccount([FromBody]CreateAccountModel accountModel)
         {
@@ -60,6 +51,22 @@ namespace Colorizer.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPost("confirmAccount/")]
+        public IActionResult ConfirmAccount([FromBody] ConfirmAccountModel confirmAcc)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+            try
+            {
+                _userService.ConfirmAccount(confirmAcc);
+                return Ok();
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+
 
         [HttpGet("getUserProfile")]
         [Authorize]
@@ -88,13 +95,7 @@ namespace Colorizer.Controllers
             return Ok(user);
         }
 
-        [HttpPut("confirmAccount")]
-        public IActionResult ConfirmAccount([FromBody]User user)
-        {
-            _userService.ConfirmAccount(user);
 
-            return Ok();
-        }
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]

@@ -22,7 +22,7 @@ export class UsersApiService extends BaseApiService {
   }
 
   public async confirmAccount(data: any): Promise<AxiosResponse> {
-    return this.PUT(`${usersApiUrl}/confirmAccount/`, data);
+    return this.POST(`${usersApiUrl}/confirmAccount/`, data);
   }
 
   public async DeleteUser(id: string) {

@@ -4,7 +4,7 @@ import { UsersApiService } from '../../../services';
 import * as yup from 'yup';
 import { Form, Formik, FormikProps } from 'formik';
 import { Button, CircularProgress, Grid, TextField, Typography, makeStyles } from '@material-ui/core';
-import { User } from '../../models';
+import { User, UserProfile } from '../../models';
 
 const useStyles = makeStyles({
     root: {
@@ -82,9 +82,20 @@ export default function ConfirmAccountPage() {
 
 
     const onSubmit = async (values: ConfirmAccountProps, actions) => {
+        const confirmAcc: UserProfile = {
+            firstName: values.firstName,
+            lastName: values.lastName,
+            email: user.email,
+            id: user.id,
+            role: user.role,
+            avatar: ""
+        }
+
+
         user.firstName = values.firstName;
         user.lastName = values.lastName;
-        await userService.confirmAccount(user);
+        console.log(confirmAcc)
+        await userService.confirmAccount(confirmAcc);
         
         actions.setSubmitting(false);
         history.replace('/');

@@ -12,7 +12,8 @@ export function Home() {
   const [disabled, setDisabled] = useState<boolean>(false)
   const ColorizeService = new ColorizeApiService();
   const PhotoService = new PhotoApiService();
-  const [resp, setResp] = useState<string>("something")
+  const [imageName, setImageName] = useState<string>("")
+  const [ converted, setConverted] = useState<boolean>(false)
 
   useEffect(() => {
     if (image === null || image === undefined)
@@ -20,13 +21,11 @@ export function Home() {
     else setDisabled(false);
   }, [image])
 
-  function _imageEncode (arrayBuffer) {
-    let u8 = new Uint8Array(arrayBuffer)
-    let b64encoded = btoa([].reduce.call(new Uint8Array(arrayBuffer),function(p,c){return p+String.fromCharCode(c)},''))
-    let mimetype="image/jpeg"
-    return "data:"+mimetype+";base64,"+b64encoded
-}
-
+  useEffect(() => {
+    if (imageName === "" || imageName === undefined)
+      setConverted(true);
+    else setConverted(false);
+  }, [imageName])
 
 
   const downloadPhoto = async (url) => {
@@ -45,7 +44,7 @@ export function Home() {
     formData.append('image', savedImage);
     await ColorizeService.Colorize(formData)
       .then((result) => {
-        setResp(result.data)
+        setImageName(result.data)
       })
 
   }
@@ -61,7 +60,7 @@ export function Home() {
       >
 
       </DropzoneArea>
-      <Button
+      <Button style={{position:'relative', float:'left', marginTop:'10px', marginLeft:'20px'}}
         onClick={() => saveImage(image)}
         variant="contained"
         color='secondary'
@@ -69,12 +68,13 @@ export function Home() {
       >
         Convert
       </Button>
-      <Button
-        onClick={() => downloadPhoto(resp)}
+      <Button style={{position:'relative', float:'right', marginTop:'10px', marginRight:'20px'}}
+        onClick={() => downloadPhoto(imageName)}
         variant="contained"
         color='secondary'
+        disabled={converted}
       >
-        Download
+        View Result
       </Button>
     </div>
 
