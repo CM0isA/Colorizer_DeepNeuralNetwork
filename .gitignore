@@ -233,3 +233,5 @@ _Pvt_Extensions
 /Colorizer/ClientApp/public/PNG
 /Colorizer.Application/Python/Results
 /Colorizer/ClientApp/public
+*.jpg
+*.png
